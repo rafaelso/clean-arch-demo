@@ -1,0 +1,59 @@
+Objetivo
+--------
+API REST para abertura, listagem e busca de solicitações por id
+
+API
+---
+
+Abertura de Solicitações
+------------------------
+
+POST /solicitacoes
+
+{
+    "descricao": "string"
+}
+
+201 Created
+
+{
+    "id": "uuid",
+    "descricao": "string",
+    "status": "enum" (ABERTA, EM_ANDAMENTO, FECHADA, CANCELADA),
+    "aberta_em: "datetime"
+}
+
+
+
+Listagem de Solicitações
+------------------------
+
+GET /solicitacoes
+
+[
+    {
+        id: "uuid",
+        descricao: "string"
+    },
+    {
+        id: "uuid",
+        descricao: "string"
+    },
+    ...
+    {
+        id: "uuid",
+        descricao: "string"
+    }
+]
+
+Busca de Solicitação por ID
+---------------------------
+
+GET /solicitacoes/{id}
+
+{
+    "id": "uuid",
+    "descricao": "string",
+    "status": "enum" (ABERTA, EM_ANDAMENTO, FECHADA, CANCELADA),
+    "aberta_em: "datetime"
+}
