@@ -1,8 +1,8 @@
 package br.com.rafaelso.cleanarchdemo.core.application.usecase;
 
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
-@Component
+@Service
 public class ListarSolicitacaoUseCase {
 
 }
