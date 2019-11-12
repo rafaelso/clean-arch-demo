@@ -3,6 +3,7 @@ package br.com.rafaelso.cleanarchdemo.infra.entrypoint.http.dto;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonUnwrapped;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 public class AberturaSolicitacaoResponse {
@@ -18,6 +19,7 @@ public class AberturaSolicitacaoResponse {
 	}
 
 	@JsonInclude(Include.NON_NULL)
+	@JsonUnwrapped
 	private SolicitacaoDataResponse data;
 
 	@JsonInclude(Include.NON_NULL)
