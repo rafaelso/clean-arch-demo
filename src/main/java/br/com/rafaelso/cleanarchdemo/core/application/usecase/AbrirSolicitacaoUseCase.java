@@ -1,7 +1,7 @@
 package br.com.rafaelso.cleanarchdemo.core.application.usecase;
 
 import java.time.LocalDateTime;
-import java.util.Collections;
+import java.util.ArrayList;
 import java.util.UUID;
 
 import org.apache.commons.lang3.StringUtils;
@@ -17,7 +17,7 @@ import br.com.rafaelso.cleanarchdemo.core.domain.StatusSolicitacao;
 public class AbrirSolicitacaoUseCase implements UseCase<AbrirSolicitacaoEntrada, AbrirSolicitacaoSaida> {
 
 	private SalvarSolicitacaoGateway gateway;
-	
+
 	public AbrirSolicitacaoUseCase(SalvarSolicitacaoGateway gateway) {
 		super();
 		this.gateway = gateway;
@@ -26,7 +26,7 @@ public class AbrirSolicitacaoUseCase implements UseCase<AbrirSolicitacaoEntrada,
 	@Override
 	public AbrirSolicitacaoSaida executar(AbrirSolicitacaoEntrada entrada) {
 
-		AbrirSolicitacaoSaida resposta = new AbrirSolicitacaoSaida(Collections.emptyList());
+		AbrirSolicitacaoSaida resposta = new AbrirSolicitacaoSaida(new ArrayList<String>());
 
 		if (entrada != null && StringUtils.isBlank(entrada.getDescricao())) {
 			resposta.getErros().add("A descrição não pode ser nula ou branco");
@@ -36,11 +36,11 @@ public class AbrirSolicitacaoUseCase implements UseCase<AbrirSolicitacaoEntrada,
 			return resposta;
 		}
 
-		Solicitacao solicitacaoAberta = gateway.salvar(new Solicitacao(UUID.randomUUID(), entrada.getDescricao(), StatusSolicitacao.ABERTA,
-				LocalDateTime.now()));
-		
+		Solicitacao solicitacaoAberta = gateway.salvar(new Solicitacao(UUID.randomUUID(), entrada.getDescricao(),
+				StatusSolicitacao.ABERTA, LocalDateTime.now()));
+
 		resposta.setSolicitacao(solicitacaoAberta);
-		
+
 		return resposta;
 	}
 
