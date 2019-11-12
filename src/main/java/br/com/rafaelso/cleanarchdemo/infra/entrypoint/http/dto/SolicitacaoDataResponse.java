@@ -1,36 +1,25 @@
-package br.com.rafaelso.cleanarchdemo.infra.dataprovider.jpa.entity;
+package br.com.rafaelso.cleanarchdemo.infra.entrypoint.http.dto;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import br.com.rafaelso.cleanarchdemo.core.domain.StatusSolicitacao;
 
-@Entity
-@Table(name = "solicitacao")
-public class SolicitacaoJpaEntity {
+public class SolicitacaoDataResponse {
 
-	@Id
 	private UUID id;
-	
-	@Column(name = "descricao")
+
 	private String descricao;
-	
-	@Column(name = "status")
+
 	private StatusSolicitacao status;
-	
-	@Column(name = "data_abertura")
+
+	@JsonProperty("aberta_em")
 	private LocalDateTime dataAbertura;
 
-	public SolicitacaoJpaEntity() {
-		super();
-	}
-
-	public SolicitacaoJpaEntity(UUID id, String descricao, StatusSolicitacao status, LocalDateTime dataAbertura) {
+	public SolicitacaoDataResponse(UUID id, String descricao, StatusSolicitacao status,
+			LocalDateTime dataAbertura) {
 		super();
 		this.id = id;
 		this.descricao = descricao;

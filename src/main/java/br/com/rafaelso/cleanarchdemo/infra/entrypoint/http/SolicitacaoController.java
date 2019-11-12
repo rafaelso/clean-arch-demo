@@ -11,6 +11,7 @@ import br.com.rafaelso.cleanarchdemo.core.application.dto.AbrirSolicitacaoSaida;
 import br.com.rafaelso.cleanarchdemo.core.application.usecase.AbrirSolicitacaoUseCase;
 import br.com.rafaelso.cleanarchdemo.infra.entrypoint.http.dto.AberturaSolicitacaoRequest;
 import br.com.rafaelso.cleanarchdemo.infra.entrypoint.http.dto.AberturaSolicitacaoResponse;
+import br.com.rafaelso.cleanarchdemo.infra.entrypoint.http.dto.SolicitacaoDataResponse;
 
 @RestController
 @RequestMapping("/solicitacoes")
@@ -30,12 +31,12 @@ public class SolicitacaoController {
 		AbrirSolicitacaoSaida saida = usecase.executar(new AbrirSolicitacaoEntrada(entrada.getDescricao()));
 
 		if (!saida.getErros().isEmpty()) {
-			return ResponseEntity.badRequest().build();
+			return ResponseEntity.badRequest().body(new AberturaSolicitacaoResponse(saida.getErros()));
 		}
 
 		return ResponseEntity.ok()
-				.body(new AberturaSolicitacaoResponse(saida.getSolicitacao().getId(),
+				.body(new AberturaSolicitacaoResponse(new SolicitacaoDataResponse(saida.getSolicitacao().getId(),
 						saida.getSolicitacao().getDescricao(), saida.getSolicitacao().getStatus(),
-						saida.getSolicitacao().getDataAbertura()));
+						saida.getSolicitacao().getDataAbertura())));
 	}
 }

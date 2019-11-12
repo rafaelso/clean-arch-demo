@@ -1,61 +1,48 @@
 package br.com.rafaelso.cleanarchdemo.infra.entrypoint.http.dto;
 
-import java.time.LocalDateTime;
-import java.util.UUID;
+import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-
-import br.com.rafaelso.cleanarchdemo.core.domain.StatusSolicitacao;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 public class AberturaSolicitacaoResponse {
 
-	private UUID id;
-
-	private String descricao;
-
-	private StatusSolicitacao status;
-
-	@JsonProperty("aberta_em")
-	private LocalDateTime dataAbertura;
-
-	public AberturaSolicitacaoResponse(UUID id, String descricao, StatusSolicitacao status,
-			LocalDateTime dataAbertura) {
+	public AberturaSolicitacaoResponse(List<String> erros) {
 		super();
-		this.id = id;
-		this.descricao = descricao;
-		this.status = status;
-		this.dataAbertura = dataAbertura;
+		this.erros = erros;
 	}
 
-	public UUID getId() {
-		return id;
+	public AberturaSolicitacaoResponse(SolicitacaoDataResponse data) {
+		super();
+		this.data = data;
 	}
 
-	public void setId(UUID id) {
-		this.id = id;
+	@JsonInclude(Include.NON_NULL)
+	private SolicitacaoDataResponse data;
+
+	@JsonInclude(Include.NON_NULL)
+	private List<String> erros;
+
+	public AberturaSolicitacaoResponse(SolicitacaoDataResponse data, List<String> erros) {
+		super();
+		this.data = data;
+		this.erros = erros;
 	}
 
-	public String getDescricao() {
-		return descricao;
+	public SolicitacaoDataResponse getData() {
+		return data;
 	}
 
-	public void setDescricao(String descricao) {
-		this.descricao = descricao;
+	public void setData(SolicitacaoDataResponse data) {
+		this.data = data;
 	}
 
-	public StatusSolicitacao getStatus() {
-		return status;
+	public List<String> getErros() {
+		return erros;
 	}
 
-	public void setStatus(StatusSolicitacao status) {
-		this.status = status;
+	public void setErros(List<String> erros) {
+		this.erros = erros;
 	}
 
-	public LocalDateTime getDataAbertura() {
-		return dataAbertura;
-	}
-
-	public void setDataAbertura(LocalDateTime dataAbertura) {
-		this.dataAbertura = dataAbertura;
-	}
 }
